@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 //
 const register = require("./controller/register");
 const login = require("./controller/login");
-const posts = require("./controller/posts");
+const getinfo = require("./controller/getinfo");
 const authenticateToken = require("./controller/authenticateToken");
 const cookieParser = require("cookie-parser");
 
@@ -39,8 +39,8 @@ app.post("/login", (req, res) => {
   login.login(req, res, db);
 });
 
-app.get("/posts", authenticateToken, (req, res) => {
-  posts.posts(req, res, db);
+app.get("/getinfo", authenticateToken, (req, res) => {
+  getinfo.getinfo(req, res, db);
 });
 
 app.listen(process.env.PORT || 3000, () => {
