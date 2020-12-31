@@ -5,16 +5,17 @@ const login = (req, res, db) => {
   console.log(username, password);
   db("account")
     .where({ username })
-    .select("password")
+    .select("password", "id")
     .then((result) => {
       if (!result || !result[0]) {
         return res.status(400).send("Username not found");
       }
+
       let pass = result[0].password;
       if (password === pass) {
         // login
 
-        const token = jwt.sign({ id: username }, process.env.TOKEN_SECRET, {
+        const token = jwt.sign({ id: result[0].id }, process.env.TOKEN_SECRET, {
           expiresIn: "500s",
         });
 
