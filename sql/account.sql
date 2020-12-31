@@ -4,6 +4,9 @@ CREATE TABLE account(
     password VARCHAR ( 20 ) NOT NULL
 );
 
+
+
+
 INSERT INTO account ( username, password)
     VALUES ('duong', 'duong');
 

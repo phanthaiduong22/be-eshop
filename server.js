@@ -8,6 +8,8 @@ const register = require("./controller/register");
 const login = require("./controller/login");
 const getinfo = require("./controller/getinfo");
 const authenticateToken = require("./controller/authenticateToken");
+const search = require("./controller/search");
+
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -42,6 +44,11 @@ app.post("/login", (req, res) => {
 app.get("/getinfo", authenticateToken, (req, res) => {
   getinfo.getinfo(req, res, db);
 });
+
+app.get("/search", (req, res) => {
+  search.search(req, res, db);
+});
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
