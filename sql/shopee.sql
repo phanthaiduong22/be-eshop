@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS "Cart";
 DROP TABLE IF EXISTS "Messages";
 DROP TABLE IF EXISTS "Product_Deal";
 DROP TABLE IF EXISTS "Deal";
+DROP TABLE IF EXISTS "Product_Image";
 DROP TABLE IF EXISTS "Products";
 DROP TABLE IF EXISTS "Category";
 DROP TABLE IF EXISTS "Store";
@@ -33,17 +34,17 @@ CREATE TABLE "Store"(
 );
 CREATE TABLE "Category"(
 	ID int PRIMARY KEY,
+	Image_url varchar(255),
 	Name varchar(255) NOT NULL
 );
 CREATE TABLE "Products"(
-	ID int UNIQUE PRIMARY KEY,
+	ID serial UNIQUE PRIMARY KEY,
 	STORE_ID int NOT NULL,
 	CAT_ID int NOT NULL,
 	Stock int NOT NULL,
 	Price int NOT NULL,
 	Origin varchar(255),
-	Product_name TEXT,
-	Image_Url TEXT,
+	Product_name varchar(255),
 	Description TEXT,
 	Date_created TIMESTAMP NOT NULL,
 	CONSTRAINT fk_store 
@@ -52,6 +53,15 @@ CREATE TABLE "Products"(
 	CONSTRAINT fk_cat
 		FOREIGN KEY(CAT_ID) 
 			REFERENCES "Category"(ID)
+);
+CREATE TABLE "Product_Image"(
+	Product_ID int,
+	Image_no SERIAL,
+	Image_Url varchar(255),
+	PRIMARY KEY (Product_ID,Image_no),
+	CONSTRAINT fk_product
+		FOREIGN KEY(Product_ID) 
+			REFERENCES "Products"(ID)
 );
 CREATE TABLE "Cart"(
 	USER_ID int PRIMARY KEY,
@@ -65,6 +75,7 @@ CREATE TABLE "CartItem"(
 	PRODUCT_ID int,
 	Counting int,
 	Price int,
+	Checked boolean,
 	CONSTRAINT fk_cart 
 		FOREIGN KEY(CART_ID) 
 			REFERENCES "Cart"(USER_ID),
@@ -201,14 +212,14 @@ VALUES (0,'Bao Anh Shop',5,'Chuyên kinh doanh mỹ phẩm các loại.'),
 (2,'Mens Wear',5,'Dan ong lich lam');
 
 INSERT INTO "Category"
-VALUES (0,'Thời trang nam'),
-(1,'Thời trang nữ'),
-(2,'Điện tử'),
-(3,'Gia dụng'),
-(4,'Thể thao & du lịch'),
-(5,'Mẹ và bé'),
-(6,'Phụ kiện thời trang'),
-(7,'Voucher & dịch vụ'),
-(8,'Nhà sách'),
-(9,'Đồ chơi'),
-(10,'Thú cưng');
+VALUES (0,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thời trang nam'),
+(1,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thời trang nữ'),
+(2,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Điện tử'),
+(3,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Gia dụng'),
+(4,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thể thao & du lịch'),
+(5,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Mẹ và bé'),
+(6,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Phụ kiện thời trang'),
+(7,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Voucher & dịch vụ'),
+(8,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Nhà sách'),
+(9,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Đồ chơi'),
+(10,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thú cưng');
