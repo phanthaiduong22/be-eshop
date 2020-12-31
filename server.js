@@ -9,6 +9,8 @@ const login = require("./controller/login");
 const getinfo = require("./controller/getinfo");
 const authenticateToken = require("./controller/authenticateToken");
 const search = require("./controller/search");
+const getcategory = require("./controller/getcategory");
+const postproduct = require("./controller/postproduct");
 
 const cookieParser = require("cookie-parser");
 
@@ -49,6 +51,13 @@ app.get("/search", (req, res) => {
   search.search(req, res, db);
 });
 
+app.get("/getcategory", (req, res) => {
+  getcategory.getcategory(req, res, db);
+});
+
+app.post("/postproduct", authenticateToken, (req, res) => {
+  postproduct.postproduct(req, res, db);
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
