@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const login = (req, res, db) => {
   let { username, password } = req.body;
   console.log(username, password);
-  db("account")
+  db("User")
     .where({ username })
     .select("password", "id")
     .then((result) => {
