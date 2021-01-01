@@ -11,6 +11,7 @@ const authenticateToken = require("./controller/authenticateToken");
 const search = require("./controller/search");
 const getcategory = require("./controller/getcategory");
 const postproduct = require("./controller/postproduct");
+const cart=require("./controller/cart");
 
 const cookieParser = require("cookie-parser");
 
@@ -63,3 +64,7 @@ app.post("/postproduct", authenticateToken, (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
 });
+
+app.get("/getcart",authenticateToken,(req,res)=>{
+  cart.getCart(req,res,db)
+})
