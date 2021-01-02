@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS "Store";
 DROP TABLE IF EXISTS "User";
 
 CREATE TABLE "User"(
-	ID int PRIMARY KEY ,
+	ID serial PRIMARY KEY ,
 	Username varchar(255) UNIQUE NOT NULL ,
 	Password varchar(255) NOT NULL ,
 	Phone varchar(20),

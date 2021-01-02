@@ -13,6 +13,8 @@ const home = require("./controller/home")
 const product = require("./controller/product")
 const category = require("./controller/category")
 const cart = require("./controller/cart")
+const getcategory = require("./controller/getcategory");
+const postproduct = require("./controller/postproduct");
 
 const cookieParser = require("cookie-parser");
 
@@ -30,6 +32,7 @@ const db = knex({
 
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 
@@ -64,6 +67,13 @@ app.get("/category", (req, res) => {
 app.get("/cart", (req, res) => {
   cart.cart(req, res, db)
 })
+app.get("/getcategory", (req, res) => {
+  getcategory.getcategory(req, res, db);
+});
+
+app.post("/postproduct", authenticateToken, (req, res) => {
+  postproduct.postproduct(req, res, db);
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
