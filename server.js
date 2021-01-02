@@ -9,6 +9,9 @@ const login = require("./controller/login");
 const getinfo = require("./controller/getinfo");
 const authenticateToken = require("./controller/authenticateToken");
 const search = require("./controller/search");
+const home = require("./controller/home")
+const product = require("./controller/product")
+const category = require("./controller/category")
 
 const cookieParser = require("cookie-parser");
 
@@ -30,7 +33,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("eshop works");
+  home.home(req, res, db);
 });
 
 app.post("/register", (req, res) => {
@@ -49,6 +52,13 @@ app.get("/search", (req, res) => {
   search.search(req, res, db);
 });
 
+app.get("/product", (req, res) => {
+  product.product(req, res, db);
+});
+
+app.get("/category", (req, res) => {
+  category.category(req, res, db);
+})
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
