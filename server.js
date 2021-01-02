@@ -64,7 +64,7 @@ app.get("/category", (req, res) => {
   category.category(req, res, db);
 })
 
-app.get("/cart", (req, res) => {
+app.post("/cart",authenticateToken, (req, res) => {
   cart.cart(req, res, db)
 })
 app.get("/getcategory", (req, res) => {
