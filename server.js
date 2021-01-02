@@ -12,6 +12,7 @@ const search = require("./controller/search");
 const home = require("./controller/home")
 const product = require("./controller/product")
 const category = require("./controller/category")
+const cart = require("./controller/cart")
 
 const cookieParser = require("cookie-parser");
 
@@ -58,6 +59,10 @@ app.get("/product", (req, res) => {
 
 app.get("/category", (req, res) => {
   category.category(req, res, db);
+})
+
+app.get("/cart", (req, res) => {
+  cart.cart(req, res, db)
 })
 
 app.listen(process.env.PORT || 3000, () => {
