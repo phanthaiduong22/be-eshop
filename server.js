@@ -12,7 +12,7 @@ const search = require("./controller/search");
 const getcategory = require("./controller/getcategory");
 const postproduct = require("./controller/postproduct");
 const cart=require("./controller/cart");
-
+const user=require("./controller/User");
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -67,4 +67,13 @@ app.listen(process.env.PORT || 3000, () => {
 
 app.get("/getcart",authenticateToken,(req,res)=>{
   cart.getCart(req,res,db)
+})
+app.post("/pushcart",authenticateToken,(req,res)=>{
+  cart.pushCart(req,res,db)
+})
+app.get("/getUser",authenticateToken,(req,res)=>{
+  user.getUser(req,res,db);
+})
+app.delete("/deletecart",authenticateToken,(req,res)=>{
+  cart.deleteCart(req,res,db);
 })
