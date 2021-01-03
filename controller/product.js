@@ -46,7 +46,7 @@ function getGeneralInfoProduct(db, idPr){
 }
 
 const product = (req, res, db) => {
-  console.log(req.query.action);
+  // console.log(req.query.action);
   if(req.query.action == 'getStar'){
     getStar(db,req.query.id).then( result => {
       res.json(result);

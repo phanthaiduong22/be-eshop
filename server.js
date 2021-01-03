@@ -15,6 +15,7 @@ const category = require("./controller/category")
 const cart = require("./controller/cart")
 const getcategory = require("./controller/getcategory");
 const postproduct = require("./controller/postproduct");
+const shop = require("./controller/shop");
 
 const cookieParser = require("cookie-parser");
 
@@ -69,6 +70,9 @@ app.post("/cart",authenticateToken, (req, res) => {
 })
 app.get("/getcategory", (req, res) => {
   getcategory.getcategory(req, res, db);
+});
+app.post("/shop",authenticateToken, (req, res) => {
+  shop.shop(req, res, db);
 });
 
 app.post("/postproduct", authenticateToken, (req, res) => {
