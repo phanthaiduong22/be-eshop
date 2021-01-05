@@ -22,8 +22,22 @@ CREATE TABLE "User"(
 	Password varchar(255) NOT NULL ,
 	Phone varchar(20),
 	Name varchar(255),
-	Email varchar(255)
+	Email varchar(255),
+	BirthDate date,
+	AddressID int NOT NULL,
+	CONSTRAINT fk_address FOREIGN KEY(AddressID) REFERENCES "Address"(ID)
 );
+
+
+CREATE TABLE "Address"(
+	ID serial PRIMARY KEY ,
+	Street varchar(255) NOT NULL ,
+	Ward varchar(255) NOT NULL ,
+	District varchar(255) NOT NULL ,
+	City varchar(255) NOT NULL
+);
+
+
 
 CREATE TABLE "Store"(
 	USER_ID int PRIMARY KEY,
@@ -200,11 +214,19 @@ CREATE TABLE "Product_Deal"(
 );
 
 INSERT INTO "User"
-VALUES (0,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com'),
-(1,'hoailinh','password','0903871321','Vo Hoai Linh','hoailinh@email.com'),
-(2,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com'),
-(3,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com'),
-(4,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com');
+VALUES (0,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com', '1990-11-10', 1),
+(1,'hoailinh','password','0903871321','Vo Hoai Linh','hoailinh@email.com', '1990-11-10', 3),
+(2,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com','1990-11-10', 0),
+(3,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com','1990-11-10', 2),
+(4,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com', '1990-11-10', 4);
+
+
+INSERT INTO "Address" VALUES
+(0, '5 Ap Rach Mieu', "Xa Hung Thinh", "Huyen Chau Thanh", "Tinh Dong Thap"),
+(1, '122 Ngo Quyen', "Phuong 11", "Quan 5", "TP. Ho Chi Minh"),
+(2, '12 Nguyen Trai', "Phuong 3", "Quan 3", "TP. Ho Chi Minh"),
+(3, '2 Pham Van Dong', "Phuong 6", "Quan 1", "TP. Ho Chi Minh"),
+(4, '43A Le Loi', "Phuong 1", "Quan Cau Giay", "TP. Ha Noi"),
 
 INSERT INTO "Store"
 VALUES (0,'Bao Anh Shop',5,'Chuyên kinh doanh mỹ phẩm các loại.'),

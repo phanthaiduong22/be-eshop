@@ -14,6 +14,7 @@ const postproduct = require("./controller/postproduct");
 const cart=require("./controller/cart");
 const user=require("./controller/User");
 const cookieParser = require("cookie-parser");
+const checkout = require("./controller/checkout");
 
 dotenv.config();
 
@@ -76,4 +77,8 @@ app.get("/getUser",authenticateToken,(req,res)=>{
 })
 app.delete("/deletecart",authenticateToken,(req,res)=>{
   cart.deleteCart(req,res,db);
+})
+
+app.get("/checkout/getProducts", authenticateToken, (req, res)=>{
+  checkout.getProducts(eq,res,db);
 })
