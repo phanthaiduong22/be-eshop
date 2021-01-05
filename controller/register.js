@@ -17,7 +17,17 @@ const register = (req, res, db) => {
               user_id: id,
             })
             .then((data) => console.log("created store"));
+          db("Cart")
+            .select("*")
+            .where("user_id", "=", id)
+            .then((data) => {
+              if (data.length === 0)
+                db("Cart")
+                  .insert({ user_id: id, price: 0 })
+                  .then((data) => console.log("created cart"));
+            });
         });
+
       res.status(200).json("Successful Register");
     })
     .catch((err) => {
