@@ -15,6 +15,8 @@ const category = require("./controller/category")
 const cart = require("./controller/cart")
 const getcategory = require("./controller/getcategory");
 const postproduct = require("./controller/postproduct");
+const cart=require("./controller/cart");
+const user=require("./controller/User");
 const shop = require("./controller/shop");
 
 const cookieParser = require("cookie-parser");
@@ -82,3 +84,16 @@ app.post("/postproduct", authenticateToken, (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
 });
+
+app.get("/getcart",authenticateToken,(req,res)=>{
+  cart.getCart(req,res,db)
+})
+app.post("/pushcart",authenticateToken,(req,res)=>{
+  cart.pushCart(req,res,db)
+})
+app.get("/getUser",authenticateToken,(req,res)=>{
+  user.getUser(req,res,db);
+})
+app.delete("/deletecart",authenticateToken,(req,res)=>{
+  cart.deleteCart(req,res,db);
+})
