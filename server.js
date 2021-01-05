@@ -9,14 +9,13 @@ const login = require("./controller/login");
 const getinfo = require("./controller/getinfo");
 const authenticateToken = require("./controller/authenticateToken");
 const search = require("./controller/search");
-const home = require("./controller/home")
-const product = require("./controller/product")
-const category = require("./controller/category")
-const cart = require("./controller/cart")
+const home = require("./controller/home");
+const product = require("./controller/product");
+const category = require("./controller/category");
+const cart = require("./controller/cart");
 const getcategory = require("./controller/getcategory");
 const postproduct = require("./controller/postproduct");
-const cart=require("./controller/cart");
-const user=require("./controller/User");
+const user = require("./controller/User");
 const shop = require("./controller/shop");
 
 const cookieParser = require("cookie-parser");
@@ -65,15 +64,15 @@ app.get("/product", (req, res) => {
 
 app.get("/category", (req, res) => {
   category.category(req, res, db);
-})
+});
 
-app.post("/cart",authenticateToken, (req, res) => {
-  cart.cart(req, res, db)
-})
+app.post("/cart", authenticateToken, (req, res) => {
+  cart.cart(req, res, db);
+});
 app.get("/getcategory", (req, res) => {
   getcategory.getcategory(req, res, db);
 });
-app.post("/shop",authenticateToken, (req, res) => {
+app.post("/shop", authenticateToken, (req, res) => {
   shop.shop(req, res, db);
 });
 
@@ -85,15 +84,15 @@ app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
 });
 
-app.get("/getcart",authenticateToken,(req,res)=>{
-  cart.getCart(req,res,db)
-})
-app.post("/pushcart",authenticateToken,(req,res)=>{
-  cart.pushCart(req,res,db)
-})
-app.get("/getUser",authenticateToken,(req,res)=>{
-  user.getUser(req,res,db);
-})
-app.delete("/deletecart",authenticateToken,(req,res)=>{
-  cart.deleteCart(req,res,db);
-})
+app.get("/getcart", authenticateToken, (req, res) => {
+  cart.getCart(req, res, db);
+});
+app.post("/pushcart", authenticateToken, (req, res) => {
+  cart.pushCart(req, res, db);
+});
+app.get("/getUser", authenticateToken, (req, res) => {
+  user.getUser(req, res, db);
+});
+app.delete("/deletecart", authenticateToken, (req, res) => {
+  cart.deleteCart(req, res, db);
+});
