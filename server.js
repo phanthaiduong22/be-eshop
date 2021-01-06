@@ -13,7 +13,6 @@ const home = require("./controller/home");
 const product = require("./controller/product");
 const category = require("./controller/category");
 const cart = require("./controller/cart");
-const getcategory = require("./controller/getcategory");
 const postproduct = require("./controller/postproduct");
 const user = require("./controller/User");
 const shop = require("./controller/shop");
@@ -69,19 +68,17 @@ app.get("/category", (req, res) => {
 app.post("/cart", authenticateToken, (req, res) => {
   cart.cart(req, res, db);
 });
+
 app.get("/getcategory", (req, res) => {
-  getcategory.getcategory(req, res, db);
+  category.category(req, res, db);
 });
+
 app.post("/shop", authenticateToken, (req, res) => {
   shop.shop(req, res, db);
 });
 
 app.post("/postproduct", authenticateToken, (req, res) => {
   postproduct.postproduct(req, res, db);
-});
-
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`app is running on ${process.env.PORT}`);
 });
 
 app.get("/getcart", authenticateToken, (req, res) => {
@@ -95,4 +92,7 @@ app.get("/getUser", authenticateToken, (req, res) => {
 });
 app.delete("/deletecart", authenticateToken, (req, res) => {
   cart.deleteCart(req, res, db);
+});
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`app is running on ${process.env.PORT}`);
 });
