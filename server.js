@@ -17,7 +17,7 @@ const getcategory = require("./controller/getcategory");
 const postproduct = require("./controller/postproduct");
 const user = require("./controller/User");
 const shop = require("./controller/shop");
-
+const order=require("./controller/order")
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -96,3 +96,9 @@ app.get("/getUser", authenticateToken, (req, res) => {
 app.delete("/deletecart", authenticateToken, (req, res) => {
   cart.deleteCart(req, res, db);
 });
+app.get("/storegetorder",authenticateToken,(req,res)=>{
+  order.storeGetOrders(req,res,db);
+})
+app.post("/pushorder",authenticateToken,(req,res)=>{
+  order.pushOrder(req,res,db);
+})

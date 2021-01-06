@@ -138,9 +138,9 @@ CREATE TABLE "ShippingAgency"(
 	Location varchar(255) NOT NULL
 );
 CREATE TABLE "Orders"(
-	ID int PRIMARY KEY,
+	ID serial PRIMARY KEY,
 	Code int,
-	Transport int NOT NULL,
+	Transport int,
 	Status int NOT NULL,
 	Payment int NOT NULL,
 	USER_ID int NOT NULL,
