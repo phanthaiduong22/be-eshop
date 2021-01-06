@@ -77,6 +77,14 @@ app.post("/shop", authenticateToken, (req, res) => {
   shop.shop(req, res, db);
 });
 
+app.get("/getsellerproducts", authenticateToken, (req, res) => {
+  shop.getsellerproducts(req, res, db);
+});
+
+app.post("/deletesellerproduct", authenticateToken, (req, res) => {
+  shop.deletesellerproduct(req, res, db);
+});
+
 app.post("/postproduct", authenticateToken, (req, res) => {
   postproduct.postproduct(req, res, db);
 });
