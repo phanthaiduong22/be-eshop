@@ -16,7 +16,7 @@ const cart = require("./controller/cart");
 const postproduct = require("./controller/postproduct");
 const user = require("./controller/User");
 const shop = require("./controller/shop");
-
+const order=require("./controller/order")
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -104,3 +104,12 @@ app.delete("/deletecart", authenticateToken, (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on ${process.env.PORT}`);
 });
+app.get("/storegetorder",authenticateToken,(req,res)=>{
+  order.storeGetOrders(req,res,db);
+})
+app.get("/usergetorder",authenticateToken,(req,res)=>{
+  order.userGetOrder(req,res,db);
+})
+app.post("/pushorder",authenticateToken,(req,res)=>{
+  order.pushOrder(req,res,db);
+})
