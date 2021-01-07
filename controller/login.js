@@ -16,7 +16,7 @@ const login = (req, res, db) => {
         // login
 
         const token = jwt.sign({ id: result[0].id }, process.env.TOKEN_SECRET, {
-          expiresIn: "5000s",
+          expiresIn: "1d",
         });
 
         res.cookie("token", token, { httpOnly: true });

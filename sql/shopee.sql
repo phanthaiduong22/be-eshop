@@ -23,6 +23,7 @@ CREATE TABLE "User"(
 	Phone varchar(20),
 	Name varchar(255),
 	Email varchar(255),
+	Sex boolean,
 	BirthDate date,
 	AddressID int NOT NULL,
 	CONSTRAINT fk_address FOREIGN KEY(AddressID) REFERENCES "Address"(ID)
@@ -88,7 +89,6 @@ CREATE TABLE "CartItem"(
 	CART_ID int,
 	PRODUCT_ID int,
 	Counting int,
-	Price int,
 	Checked boolean,
 	CONSTRAINT fk_cart 
 		FOREIGN KEY(CART_ID) 
@@ -98,6 +98,8 @@ CREATE TABLE "CartItem"(
 			REFERENCES "Products"(ID),
 	PRIMARY KEY(CART_ID,PRODUCT_ID)
 );
+
+
 CREATE TABLE "Follow"(
 	USER_ID int,
 	STORE_ID int,
@@ -151,13 +153,16 @@ CREATE TABLE "ShippingAgency"(
 	Name varchar(255) NOT NULL,
 	Location varchar(255) NOT NULL
 );
+
+
 CREATE TABLE "Orders"(
-	ID int PRIMARY KEY,
+	ID serial PRIMARY KEY,
 	Code int,
 	Transport int NOT NULL,
 	Status int NOT NULL,
-	Payment int NOT NULL,
+	Payment varchar(255) NOT NULL,
 	USER_ID int NOT NULL,
+	TotalPrice int NOT NULL,
 	CONSTRAINT fk_user
 		FOREIGN KEY(USER_ID) 
 			REFERENCES "User"(ID),
@@ -168,12 +173,17 @@ CREATE TABLE "Orders"(
 		FOREIGN KEY(Transport) 
 			REFERENCES "ShippingAgency"(ID)
 );
+
+INSERT INTO "Orders" VALUES
+(DEFAULT, 12, 1, 1, 'cash', 1, 200000) RETURNING id;
+
+
+
 CREATE TABLE "OrderDetails"(
 	ORDER_ID int,
 	No serial,
 	PRODUCT_ID int,
 	Counting int,
-	Price int,
 	PRIMARY KEY(ORDER_ID,No),
 	CONSTRAINT fk_order
 		FOREIGN KEY(ORDER_ID) 
@@ -182,6 +192,7 @@ CREATE TABLE "OrderDetails"(
 		FOREIGN KEY(PRODUCT_ID) 
 			REFERENCES "Products"(ID)
 );
+
 CREATE TABLE "Messages"(
 	ID serial PRIMARY KEY,
 	SENDER_ID int,
@@ -213,20 +224,28 @@ CREATE TABLE "Product_Deal"(
 			REFERENCES "Products"(ID)
 );
 
-INSERT INTO "User"
-VALUES (0,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com', '1990-11-10', 1),
-(1,'hoailinh','password','0903871321','Vo Hoai Linh','hoailinh@email.com', '1990-11-10', 3),
-(2,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com','1990-11-10', 0),
-(3,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com','1990-11-10', 2),
-(4,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com', '1990-11-10', 4);
-
-
 INSERT INTO "Address" VALUES
-(0, '5 Ap Rach Mieu', "Xa Hung Thinh", "Huyen Chau Thanh", "Tinh Dong Thap"),
-(1, '122 Ngo Quyen', "Phuong 11", "Quan 5", "TP. Ho Chi Minh"),
-(2, '12 Nguyen Trai', "Phuong 3", "Quan 3", "TP. Ho Chi Minh"),
-(3, '2 Pham Van Dong', "Phuong 6", "Quan 1", "TP. Ho Chi Minh"),
-(4, '43A Le Loi', "Phuong 1", "Quan Cau Giay", "TP. Ha Noi"),
+(0, '5 Ap Rach Mieu', 'Xa Hung Thinh', 'Huyen Chau Thanh', 'Tinh Dong Thap'),
+(1, '122 Ngo Quyen', 'Phuong 11', 'Quan 5', 'TP. Ho Chi Minh'),
+(2, '12 Nguyen Trai', 'Phuong 3', 'Quan 3', 'TP. Ho Chi Minh'),
+(3, '2 Pham Van Dong', 'Phuong 6', 'Quan 1', 'TP. Ho Chi Minh'),
+(4, '43A Le Loi', 'Phuong 1', 'Quan Cau Giay', 'TP. Ha Noi');
+
+INSERT INTO "User"
+VALUES (0,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com', FALSE, '1990-11-10', 1),
+(1,'hoailinh','password','0903871321','Vo Hoai Linh','hoailinh@email.com',  TRUE, '1990-11-10', 3),
+(2,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com', TRUE, '1990-11-10', 0),
+(3,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com', TRUE, '1990-11-10', 2),
+(4,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com', TRUE, '1990-11-10', 4);
+
+INSERT INTO "User" VALUES
+(DEFAULT, 'minhftri','password','0903871321','Nguyen eMinh Tri',e'exampleg2@email.com', TRUE, '1990-11-10', 4) RETURNING id;
+
+INSERT INTO "ShippingAgency" VALUES
+(0, 'Giao hang tiet kiem', 'TP. Ho Chi Minh'),
+(1, 'Giao hang nhanh', 'Ha Noi'),id
+(2, 'Giao hang D&A', 'Ha Noi');
+
 
 INSERT INTO "Store"
 VALUES (0,'Bao Anh Shop',5,'Chuyên kinh doanh mỹ phẩm các loại.'),
@@ -245,3 +264,12 @@ VALUES (0,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fa
 (8,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Nhà sách'),
 (9,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Đồ chơi'),
 (10,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thú cưng');
+
+INSERT INTO "Cart" VALUES
+(0, 200000);
+
+INSERT INTO "CartItem" VALUES
+(0, 1, 2, TRUE),
+(0, 2, 2, TRUE),
+(0, 3, 2, TRUE),
+(0, 4, 2, FALSE);
