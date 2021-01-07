@@ -99,6 +99,9 @@ app.delete("/deletecart", authenticateToken, (req, res) => {
 app.get("/storegetorder",authenticateToken,(req,res)=>{
   order.storeGetOrders(req,res,db);
 })
+app.get("/usergetorder",authenticateToken,(req,res)=>{
+  order.userGetOrder(req,res,db);
+})
 app.post("/pushorder",authenticateToken,(req,res)=>{
   order.pushOrder(req,res,db);
 })
