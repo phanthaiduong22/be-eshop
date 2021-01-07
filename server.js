@@ -18,6 +18,9 @@ const user = require("./controller/User");
 const shop = require("./controller/shop");
 const order=require("./controller/order")
 const cookieParser = require("cookie-parser");
+const checkout = require("./controller/checkout");
+const info = require("./controller/info");
+
 
 dotenv.config();
 
@@ -36,6 +39,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
+
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`app is running on ${port}`);
+});
 
 app.get("/", (req, res) => {
   home.home(req, res, db);
@@ -80,6 +88,9 @@ app.post("/shop", authenticateToken, (req, res) => {
 app.get("/getsellerproducts", authenticateToken, (req, res) => {
   shop.getsellerproducts(req, res, db);
 });
+app.get("/getcart",authenticateToken,(req,res)=>{
+  cart.getCart(req,res,db)
+})
 
 app.post("/deletesellerproduct", authenticateToken, (req, res) => {
   shop.deletesellerproduct(req, res, db);
@@ -88,7 +99,41 @@ app.post("/deletesellerproduct", authenticateToken, (req, res) => {
 app.post("/postproduct", authenticateToken, (req, res) => {
   postproduct.postproduct(req, res, db);
 });
+app.post("/pushcart",authenticateToken,(req,res)=>{
+  cart.pushCart(req,res,db)
+})
 
+app.get("/getUser",authenticateToken,(req,res)=>{
+  user.getUser(req,res,db);
+})
+app.delete("/deletecart",authenticateToken,(req,res)=>{
+  cart.deleteCart(req,res,db);
+})
+
+app.get("/checkout/getProducts", authenticateToken, (req, res)=>{
+  checkout.getProducts(req,res,db);
+})
+
+app.get("/checkout/getUserInfo", authenticateToken, (req, res)=>{
+  checkout.getUserInfo(req,res,db);
+})
+
+app.post("/checkout/insertOder", authenticateToken, (req, res)=>{
+  console.log("insertOder");
+  checkout.insertOder(req,res,db);
+})
+
+app.get("/info/getInfo",authenticateToken,(req,res)=>{
+  info.getInfo(req,res,db);
+})
+
+app.post("/info/pushUserInfo", authenticateToken,(req,res)=>{
+  info.pushUserInfo(req,res,db);
+})
+
+app.post("/info/deleteCartCheckout", authenticateToken,(req,res)=>{
+  checkout.deleteCartCheckout(req,res,db);
+})
 app.get("/getcart", authenticateToken, (req, res) => {
   cart.getCart(req, res, db);
 });
@@ -113,3 +158,28 @@ app.get("/usergetorder",authenticateToken,(req,res)=>{
 app.post("/pushorder",authenticateToken,(req,res)=>{
   order.pushOrder(req,res,db);
 })
+
+app.get("/checkout/getProducts", authenticateToken, (req, res) => {
+  checkout.getProducts(req, res, db);
+});
+
+app.get("/checkout/getUserInfo", authenticateToken, (req, res) => {
+  checkout.getUserInfo(req, res, db);
+});
+
+app.post("/checkout/insertOder", authenticateToken, (req, res) => {
+  checkout.insertOder(req, res, db);
+});
+
+app.post("/checkout/deleteCartCheckout", authenticateToken, (req, res) => {
+  checkout.deleteCartCheckout(req, res, db);
+});
+
+app.get("/info/getInfo", authenticateToken, (req, res) => {
+  info.getInfo(req, res, db);
+});
+
+app.post("/info/pushUserInfo", authenticateToken, (req, res) => {
+  info.pushUserInfo(req, res, db);
+});
+
