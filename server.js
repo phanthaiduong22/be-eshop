@@ -87,8 +87,6 @@ app.post("/shop", authenticateToken, (req, res) => {
 app.post("/postproduct", authenticateToken, (req, res) => {
   postproduct.postproduct(req, res, db);
 });
-
-<<<<<<< HEAD
 app.get("/getcart",authenticateToken,(req,res)=>{
   cart.getCart(req,res,db)
 })
@@ -128,12 +126,6 @@ app.post("/info/pushUserInfo", authenticateToken,(req,res)=>{
 app.post("/info/deleteCartCheckout", authenticateToken,(req,res)=>{
   checkout.deleteCartCheckout(req,res,db);
 })
-
-=======
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`app is running on ${process.env.PORT}`);
-});
-
 app.get("/getcart", authenticateToken, (req, res) => {
   cart.getCart(req, res, db);
 });
@@ -146,4 +138,28 @@ app.get("/getUser", authenticateToken, (req, res) => {
 app.delete("/deletecart", authenticateToken, (req, res) => {
   cart.deleteCart(req, res, db);
 });
->>>>>>> origin
+
+app.get("/checkout/getProducts", authenticateToken, (req, res) => {
+  checkout.getProducts(req, res, db);
+});
+
+app.get("/checkout/getUserInfo", authenticateToken, (req, res) => {
+  checkout.getUserInfo(req, res, db);
+});
+
+app.post("/checkout/insertOder", authenticateToken, (req, res) => {
+  checkout.insertOder(req, res, db);
+});
+
+app.post("/checkout/deleteCartCheckout", authenticateToken, (req, res) => {
+  checkout.deleteCartCheckout(req, res, db);
+});
+
+app.get("/info/getInfo", authenticateToken, (req, res) => {
+  info.getInfo(req, res, db);
+});
+
+app.post("/info/pushUserInfo", authenticateToken, (req, res) => {
+  info.pushUserInfo(req, res, db);
+});
+
