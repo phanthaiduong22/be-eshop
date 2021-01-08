@@ -15,7 +15,15 @@ DROP TABLE IF EXISTS "Products";
 DROP TABLE IF EXISTS "Category";
 DROP TABLE IF EXISTS "Store";
 DROP TABLE IF EXISTS "User";
+DROP TABLE IF EXISTS "Address";
 
+CREATE TABLE "Address"(
+	ID serial PRIMARY KEY ,
+	Street varchar(255) NOT NULL ,
+	Ward varchar(255) NOT NULL ,
+	District varchar(255) NOT NULL ,
+	City varchar(255) NOT NULL
+);
 CREATE TABLE "User"(
 	ID serial PRIMARY KEY ,
 	Username varchar(255) UNIQUE NOT NULL ,
@@ -28,18 +36,6 @@ CREATE TABLE "User"(
 	AddressID int NOT NULL,
 	CONSTRAINT fk_address FOREIGN KEY(AddressID) REFERENCES "Address"(ID)
 );
-
-
-CREATE TABLE "Address"(
-	ID serial PRIMARY KEY ,
-	Street varchar(255) NOT NULL ,
-	Ward varchar(255) NOT NULL ,
-	District varchar(255) NOT NULL ,
-	City varchar(255) NOT NULL
-);
-
-
-
 CREATE TABLE "Store"(
 	USER_ID int PRIMARY KEY,
 	Name varchar(255),
@@ -90,6 +86,7 @@ CREATE TABLE "CartItem"(
 	PRODUCT_ID int,
 	Counting int,
 	Checked boolean,
+	price int,
 	CONSTRAINT fk_cart 
 		FOREIGN KEY(CART_ID) 
 			REFERENCES "Cart"(USER_ID),
@@ -174,11 +171,6 @@ CREATE TABLE "Orders"(
 			REFERENCES "ShippingAgency"(ID)
 );
 
-INSERT INTO "Orders" VALUES
-(DEFAULT, 12, 1, 1, 'cash', 1, 200000) RETURNING id;
-
-
-
 CREATE TABLE "OrderDetails"(
 	ORDER_ID int,
 	No serial,
@@ -238,12 +230,9 @@ VALUES (0,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com', 
 (3,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com', TRUE, '1990-11-10', 2),
 (4,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com', TRUE, '1990-11-10', 4);
 
-INSERT INTO "User" VALUES
-(DEFAULT, 'minhftri','password','0903871321','Nguyen eMinh Tri',e'exampleg2@email.com', TRUE, '1990-11-10', 4) RETURNING id;
-
 INSERT INTO "ShippingAgency" VALUES
 (0, 'Giao hang tiet kiem', 'TP. Ho Chi Minh'),
-(1, 'Giao hang nhanh', 'Ha Noi'),id
+(1, 'Giao hang nhanh', 'Ha Noi'),
 (2, 'Giao hang D&A', 'Ha Noi');
 
 
@@ -266,10 +255,8 @@ VALUES (0,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fa
 (10,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thú cưng');
 
 INSERT INTO "Cart" VALUES
-(0, 200000);
-
-INSERT INTO "CartItem" VALUES
-(0, 1, 2, TRUE),
-(0, 2, 2, TRUE),
-(0, 3, 2, TRUE),
-(0, 4, 2, FALSE);
+(0, 200000),
+(1, 200000),
+(2, 200000),
+(3, 200000),
+(4, 200000)
