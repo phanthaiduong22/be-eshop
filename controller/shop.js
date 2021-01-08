@@ -56,6 +56,7 @@ const deletesellerproduct = (req, res, db) => {
       console.log(e);
     });
 
+
   db("Products")
     .where("id", req.body.image_id)
     .del()
