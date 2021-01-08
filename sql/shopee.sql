@@ -171,6 +171,10 @@ CREATE TABLE "Orders"(
 			REFERENCES "ShippingAgency"(ID)
 );
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/phuc2
 CREATE TABLE "OrderDetails"(
 	ORDER_ID int,
 	No serial,
@@ -217,29 +221,30 @@ CREATE TABLE "Product_Deal"(
 );
 
 INSERT INTO "Address" VALUES
-(0, '5 Ap Rach Mieu', 'Xa Hung Thinh', 'Huyen Chau Thanh', 'Tinh Dong Thap'),
-(1, '122 Ngo Quyen', 'Phuong 11', 'Quan 5', 'TP. Ho Chi Minh'),
-(2, '12 Nguyen Trai', 'Phuong 3', 'Quan 3', 'TP. Ho Chi Minh'),
-(3, '2 Pham Van Dong', 'Phuong 6', 'Quan 1', 'TP. Ho Chi Minh'),
-(4, '43A Le Loi', 'Phuong 1', 'Quan Cau Giay', 'TP. Ha Noi');
+(DEFAULT, '5 Ap Rach Mieu', 'Xa Hung Thinh', 'Huyen Chau Thanh', 'Tinh Dong Thap'),
+(DEFAULT, '122 Ngo Quyen', 'Phuong 11', 'Quan 5', 'TP. Ho Chi Minh'),
+(DEFAULT, '12 Nguyen Trai', 'Phuong 3', 'Quan 3', 'TP. Ho Chi Minh'),
+(DEFAULT, '2 Pham Van Dong', 'Phuong 6', 'Quan 1', 'TP. Ho Chi Minh'),
+(DEFAULT, '43A Le Loi', 'Phuong 1', 'Quan Cau Giay', 'TP. Ha Noi');
 
-INSERT INTO "User"
-VALUES (0,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com', FALSE, '1990-11-10', 1),
-(1,'hoailinh','password','0903871321','Vo Hoai Linh','hoailinh@email.com',  TRUE, '1990-11-10', 3),
-(2,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com', TRUE, '1990-11-10', 0),
-(3,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com', TRUE, '1990-11-10', 2),
-(4,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com', TRUE, '1990-11-10', 4);
+INSERT INTO "User" VALUES 
+(DEFAULT,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com', FALSE, '1990-11-10', 1),
+(DEFAULT,'hoailinh','password','0903871321','Vo Hoai Linh','hoailinh@email.com',  TRUE, '1990-11-10', 3),
+(DEFAULT,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com', TRUE, '1990-11-10', 0),
+(DEFAULT,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com', TRUE, '1990-11-10', 2),
+(DEFAULT,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com', TRUE, '1990-11-10', 4);
+
 
 INSERT INTO "ShippingAgency" VALUES
-(0, 'Giao hang tiet kiem', 'TP. Ho Chi Minh'),
-(1, 'Giao hang nhanh', 'Ha Noi'),
-(2, 'Giao hang D&A', 'Ha Noi');
+(DEFAULT, 'Giao hang tiet kiem', 'TP. Ho Chi Minh'),
+(DEFAULT, 'Giao hang nhanh', 'Ha Noi'),
+(DEFAULT, 'Giao hang D&A', 'Ha Noi');
 
 
 INSERT INTO "Store"
-VALUES (0,'Bao Anh Shop',5,'Chuyên kinh doanh mỹ phẩm các loại.'),
-(1,'Sieu thi dien may',4,'Chuyên laptop, di động'),
-(2,'Mens Wear',5,'Dan ong lich lam');
+VALUES (1,'Bao Anh Shop',5,'Chuyên kinh doanh mỹ phẩm các loại.'),
+(2,'Sieu thi dien may',4,'Chuyên laptop, di động'),
+(3,'Mens Wear',5,'Dan ong lich lam');
 
 INSERT INTO "Category"
 VALUES (0,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thời trang nam'),
