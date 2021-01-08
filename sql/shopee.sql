@@ -146,7 +146,7 @@ CREATE TABLE "Coupons"(
 	EndDay time
 );
 CREATE TABLE "ShippingAgency"(
-	ID int PRIMARY KEY,
+	ID serial PRIMARY KEY,
 	Name varchar(255) NOT NULL,
 	Location varchar(255) NOT NULL
 );
@@ -171,10 +171,7 @@ CREATE TABLE "Orders"(
 			REFERENCES "ShippingAgency"(ID)
 );
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/phuc2
 CREATE TABLE "OrderDetails"(
 	ORDER_ID int,
 	No serial,
@@ -230,7 +227,7 @@ INSERT INTO "Address" VALUES
 INSERT INTO "User" VALUES 
 (DEFAULT,'baoanh','password','0903871321','Nguyen Bao Anh','baoanh@email.com', FALSE, '1990-11-10', 1),
 (DEFAULT,'hoailinh','password','0903871321','Vo Hoai Linh','hoailinh@email.com',  TRUE, '1990-11-10', 3),
-(DEFAULT,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com', TRUE, '1990-11-10', 0),
+(DEFAULT,'thanhhai','password','0903871321','Tran Thanh Hai','thanhai@email.com', TRUE, '1990-11-10', 2),
 (DEFAULT,'hoanganh','password','0903871321','Gia Hoang Anh','example@email.com', TRUE, '1990-11-10', 2),
 (DEFAULT,'minhtri','password','0903871321','Nguyen Minh Tri','example2@email.com', TRUE, '1990-11-10', 4);
 
@@ -260,8 +257,8 @@ VALUES (0,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fa
 (10,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thú cưng');
 
 INSERT INTO "Cart" VALUES
-(0, 200000),
 (1, 200000),
 (2, 200000),
 (3, 200000),
-(4, 200000)
+(4, 200000),
+(5, 200000)
