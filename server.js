@@ -146,9 +146,6 @@ app.get("/getUser", authenticateToken, (req, res) => {
 app.delete("/deletecart", authenticateToken, (req, res) => {
   cart.deleteCart(req, res, db);
 });
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`app is running on ${process.env.PORT}`);
-});
 app.get("/storegetorder",authenticateToken,(req,res)=>{
   order.storeGetOrders(req,res,db);
 })
