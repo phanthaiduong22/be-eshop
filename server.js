@@ -20,7 +20,7 @@ const order=require("./controller/order")
 const cookieParser = require("cookie-parser");
 const checkout = require("./controller/checkout");
 const info = require("./controller/info");
-
+const store=require("./controller/store.js");
 
 dotenv.config();
 
@@ -180,3 +180,10 @@ app.post("/info/pushUserInfo", authenticateToken, (req, res) => {
   info.pushUserInfo(req, res, db);
 });
 
+app.get("/sell/getstoreinfo",authenticateToken,(req,res)=>{
+  store.getStore(req,res,db);
+});
+
+app.post("/sell/updatestoreinfo",authenticateToken,(req,res)=>{
+  store.updatestoreinfo(req,res,db);
+});
