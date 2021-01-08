@@ -15,7 +15,15 @@ DROP TABLE IF EXISTS "Products";
 DROP TABLE IF EXISTS "Category";
 DROP TABLE IF EXISTS "Store";
 DROP TABLE IF EXISTS "User";
+DROP TABLE IF EXISTS "Address";
 
+CREATE TABLE "Address"(
+	ID serial PRIMARY KEY ,
+	Street varchar(255) NOT NULL ,
+	Ward varchar(255) NOT NULL ,
+	District varchar(255) NOT NULL ,
+	City varchar(255) NOT NULL
+);
 CREATE TABLE "User"(
 	ID serial PRIMARY KEY ,
 	Username varchar(255) UNIQUE NOT NULL ,
@@ -28,18 +36,6 @@ CREATE TABLE "User"(
 	AddressID int,
 	CONSTRAINT fk_address FOREIGN KEY(AddressID) REFERENCES "Address"(ID)
 );
-
-
-CREATE TABLE "Address"(
-	ID serial PRIMARY KEY ,
-	Street varchar(255) NOT NULL ,
-	Ward varchar(255) NOT NULL ,
-	District varchar(255) NOT NULL ,
-	City varchar(255) NOT NULL
-);
-
-
-
 CREATE TABLE "Store"(
 	USER_ID int PRIMARY KEY,
 	Name varchar(255),
@@ -90,6 +86,7 @@ CREATE TABLE "CartItem"(
 	PRODUCT_ID int,
 	Counting int,
 	Checked boolean,
+	price int,
 	CONSTRAINT fk_cart 
 		FOREIGN KEY(CART_ID) 
 			REFERENCES "Cart"(USER_ID),
@@ -174,7 +171,10 @@ CREATE TABLE "Orders"(
 			REFERENCES "ShippingAgency"(ID)
 );
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/phuc2
 CREATE TABLE "OrderDetails"(
 	ORDER_ID int,
 	No serial,
@@ -260,10 +260,8 @@ VALUES (0,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fa
 (10,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thú cưng');
 
 INSERT INTO "Cart" VALUES
-(1, 200000);
-
-INSERT INTO "CartItem" VALUES
-(1, 1, 2, TRUE),
-(1, 2, 2, TRUE),
-(1, 3, 2, TRUE),
-(1, 4, 2, FALSE);
+(0, 200000),
+(1, 200000),
+(2, 200000),
+(3, 200000),
+(4, 200000)
