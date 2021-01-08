@@ -33,7 +33,7 @@ CREATE TABLE "User"(
 	Email varchar(255),
 	Sex boolean,
 	BirthDate date,
-	AddressID int NOT NULL,
+	AddressID int,
 	CONSTRAINT fk_address FOREIGN KEY(AddressID) REFERENCES "Address"(ID)
 );
 CREATE TABLE "Store"(
