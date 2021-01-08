@@ -12,6 +12,17 @@ function getStar(db, idPr){
   .catch((err) => { print(err);})
 }
 
+function getStore(db, idSt){
+  // tra ve tong so danh gia sao, togn so sao trung binh
+  return db
+  .select('*')
+  .table('Store')
+  .where({
+    user_id: idSt,
+  }).then()
+  .catch((err) => { print(err);})
+}
+
 function getComments(db, idPr){
   // tra ve comment ve san pham
   return db.select('*')
@@ -49,6 +60,10 @@ const product = (req, res, db) => {
   // console.log(req.query.action);
   if(req.query.action == 'getStar'){
     getStar(db,req.query.id).then( result => {
+      res.json(result);
+    });
+  }else if(req.query.action == 'getStore'){
+    getStore(db,req.query.id).then( result => {
       res.json(result);
     });
   }else if(req.query.action == 'getComments'){

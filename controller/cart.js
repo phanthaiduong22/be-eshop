@@ -90,50 +90,66 @@ async function addCartItem(db, req) {
       if (data.length != 0) {
         // Neu trong Cart da co san pham
         // console.log("vo cai dau")
-        console.log(data[0].counting);
+        // console.log(data[0].counting);
         // console.log(data)
-        db.table("CartItem")
+          db.table("CartItem")
           .update({
             counting: data[0].counting + soluong,
             price: product_price * (data[0].counting + soluong),
             checked: false,
           })
+          // .returning('counting', 'price')
           .where({
             cart_id: iduser,
             product_id: idpr,
           })
+          .then()
           .catch((e) => console.log(e));
       } else {
         // Neu trong cart chua co san pham
         // console.log("vo cai sau")
         // console.log(data.length)
-        db.table("CartItem")
+          db.table("CartItem")
           .insert({
             cart_id: iduser,
             product_id: idpr,
             counting: soluong,
             price: product_price,
             checked: false,
-          })
+          }, ['counting', 'price'])
+          // .returning('counting', 'price') 
+          // .then()
           .catch((e) => console.log(e));
       }
     })
     .catch((e) => console.log(e));
 
-  return db
-    .sum("CartItem.counting as tongsohang")
-    .sum("CartItem.price as tonggiatri")
-    .table("CartItem")
-    .innerJoin("Products", "CartItem.product_id", "=", "Products.id")
-    .where({
-      cart_id: iduser,
-    })
-    .then();
+    db
+    .table('Products')
+    .decrement('stock', soluong)
+    .where({id: idpr,})
+    .then()
+    .catch((e) => console.log(e));
+
+
+
+  // return db
+  //   .sum("CartItem.counting as tongsohang")
+  //   .sum("CartItem.price as tonggiatri")
+  //   .table("CartItem")
+  //   .innerJoin("Products", "CartItem.product_id", "=", "Products.id")
+  //   .where({
+  //     cart_id: iduser,
+  //   })
+  //   .then();
 }
 
 const cart = (req, res, db) => {
   if (req.query.action == "add") {
-    addCartItem(db, req).then((data) => res.status(200).json(data));
+    addCartItem(db, req).then((data) => {return res.status(200).json(data);
+      // console.log('data');
+      // console.log(data);
+    });
   }
 };
 
