@@ -77,6 +77,7 @@ async function addCartItem(db, req) {
   let idpr = req.body.idProduct;
   let product_price = req.body.price;
   let soluong = req.body.numPr;
+  // console.log(iduser, idpr, product_price, soluong);
   // kiem tra xem trong bd co CartItem do chua ?
   await db
     .select("counting")
@@ -92,7 +93,7 @@ async function addCartItem(db, req) {
         // console.log("vo cai dau")
         // console.log(data[0].counting);
         // console.log(data)
-          db.table("CartItem")
+        db.table("CartItem")
           .update({
             counting: data[0].counting + soluong,
             price: product_price * (data[0].counting + soluong),
@@ -109,29 +110,29 @@ async function addCartItem(db, req) {
         // Neu trong cart chua co san pham
         // console.log("vo cai sau")
         // console.log(data.length)
-          db.table("CartItem")
-          .insert({
-            cart_id: iduser,
-            product_id: idpr,
-            counting: soluong,
-            price: product_price,
-            checked: false,
-          }, ['counting', 'price'])
-          // .returning('counting', 'price') 
+        db.table("CartItem")
+          .insert(
+            {
+              cart_id: iduser,
+              product_id: idpr,
+              counting: soluong,
+              price: product_price,
+              checked: false,
+            },
+            ["counting", "price"]
+          )
+          // .returning('counting', 'price')
           // .then()
           .catch((e) => console.log(e));
       }
     })
     .catch((e) => console.log(e));
 
-    db
-    .table('Products')
-    .decrement('stock', soluong)
-    .where({id: idpr,})
+  db.table("Products")
+    .decrement("stock", soluong)
+    .where({ id: idpr })
     .then()
     .catch((e) => console.log(e));
-
-
 
   // return db
   //   .sum("CartItem.counting as tongsohang")
@@ -146,7 +147,8 @@ async function addCartItem(db, req) {
 
 const cart = (req, res, db) => {
   if (req.query.action == "add") {
-    addCartItem(db, req).then((data) => {return res.status(200).json(data);
+    addCartItem(db, req).then((data) => {
+      return res.status(200).json(data);
       // console.log('data');
       // console.log(data);
     });

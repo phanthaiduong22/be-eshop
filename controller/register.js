@@ -26,6 +26,20 @@ const register = (req, res, db) => {
                   .insert({ user_id: id, price: 0 })
                   .then((data) => console.log("created cart"));
             });
+          db("Address")
+            .select("*")
+            .where("id", "=", id)
+            .then((data) => {
+              db("Address")
+                .insert({
+                  id: id,
+                  street: "227 Nguyễn Văn Cừ",
+                  ward: "Phường 4",
+                  district: "Quận 5",
+                  city: "Tp. Hồ Chi Minh",
+                })
+                .then((data) => console.log("created Address"));
+            });
         });
 
       res.status(200).json("Successful Register");

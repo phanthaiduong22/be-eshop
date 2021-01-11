@@ -1,21 +1,36 @@
+
+from lorem_text import lorem
+import random
 import requests
+origins = ["Viet Nam", "China", "USA"]
+url = 'http://localhost:3000/postproduct'
 
-url = 'https://shopee.tw/api/v2/search_items/?by=pop&limit=30&match_id=1819984&newest=0&order=desc&page_type=shop&shop_categoryids=9271157&version=2'
+file1 = open('data.txt', 'r', encoding="utf8")
+Lines = file1.readlines()
 
-headers = {
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Referer': 'https://shopee.tw/shop/1819984/search?shopCollection=9271157',
-}
+count = 0
+# Strips the newline character
+for line in Lines:
+    productArray = []
+    ans = ""
+    for i in line:
+        if (i == ","):
+            productArray.append(ans)
+            ans = ""
+        else:
+            ans += i
+    productDict = {
+        "id": random.randint(0, 3),
+        "product_name": productArray[1],
+        "description": lorem.sentence(),
+        "origin": random.choice(origins),
+        "stock": productArray[3],
+        "price": productArray[2],
+        "cat": random.randint(0, 10),
+        "product_image": productArray[7],
+    }
+    print(productDict)
 
-r = requests.get(url, headers=headers)
+    x = requests.post(url, data=productDict)
 
-data = r.json()
-
-# print(data['items'][0].keys())
-
-for item in data['items']:
-    print('name:', item['name'])
-    print('prince:', item['price'])
-    print('sold:', item['historical_sold'])
-    print('---')
+    print(x.text)

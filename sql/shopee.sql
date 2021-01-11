@@ -65,10 +65,10 @@ CREATE TABLE "Products"(
 		FOREIGN KEY(CAT_ID) 
 			REFERENCES "Category"(ID)
 );
-CREATE TABLE "Product_Image"(
+CREATE TABLE "Product_Image"( 
 	Product_ID int,
 	Image_no SERIAL,
-	Image_Url varchar(255),
+	Image_Url varchar(1000),
 	PRIMARY KEY (Image_no),
 	CONSTRAINT fk_product
 		FOREIGN KEY(Product_ID) 
@@ -262,3 +262,4 @@ INSERT INTO "Cart" VALUES
 (3, 200000),
 (4, 200000),
 (5, 200000)
+;

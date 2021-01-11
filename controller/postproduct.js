@@ -1,6 +1,5 @@
 const postproduct = (req, res, db) => {
-  let { id } = req.user;
-  console.log(id);
+  let { id } = req.user; //req.user || req.body
   let {
     product_name,
     description,
@@ -10,7 +9,6 @@ const postproduct = (req, res, db) => {
     cat,
     product_image,
   } = req.body;
-  console.log(product_image);
   db("Products")
     .insert({
       product_name,
