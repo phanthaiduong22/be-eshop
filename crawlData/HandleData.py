@@ -20,7 +20,7 @@ for line in Lines:
         else:
             ans += i
     productDict = {
-        "id": random.randint(0, 3),
+        "id": random.randint(1, 3),
         "product_name": productArray[1],
         "description": lorem.sentence(),
         "origin": random.choice(origins),

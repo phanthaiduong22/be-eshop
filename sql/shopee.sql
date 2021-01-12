@@ -68,7 +68,7 @@ CREATE TABLE "Products"(
 CREATE TABLE "Product_Image"( 
 	Product_ID int,
 	Image_no SERIAL,
-	Image_Url varchar(1000),
+	Image_Url varchar(5000),
 	PRIMARY KEY (Image_no),
 	CONSTRAINT fk_product
 		FOREIGN KEY(Product_ID) 

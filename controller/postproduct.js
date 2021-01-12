@@ -27,6 +27,7 @@ const postproduct = (req, res, db) => {
         .where("product_name", product_name)
         .then((data) => {
           id = data[0].id;
+          console.log("id", id);
           db("Product_Image")
             .insert({
               image_url: product_image,

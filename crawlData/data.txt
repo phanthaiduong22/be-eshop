@@ -1,4 +1,3 @@
-ID,Tên SP,Giá,Kho,Lượt Xem,Đã Bán,Chỉnh Sửa,Ảnh,Link Sản Phẩm
 2299942870,Chì bấm hình chuột Micky - CHOSCH - Mã CS-8309,5000,30,16,0,https://banhang.shopee.vn/portal/product/2299942870,https://cf.shopee.vn/file/69211d591ba3009986f5e79e804759a8,https://shopee.vn/product/114297327/2299942870 
 2299942880,Chì khúc thay ngòi kẹo- nơ - Mã LT1317,4000,40,6,0,https://banhang.shopee.vn/portal/product/2299942880,https://cf.shopee.vn/file/504a7d3793d21a80201f33cb93e8b301,https://shopee.vn/product/114297327/2299942880 
 2344686521,Bút nước đen cừu mặt trăng,5000,50,1,0,https://banhang.shopee.vn/portal/product/2344686521,https://cf.shopee.vn/file/6bd876e7e4a2e8df8430f19334f2059e,https://shopee.vn/product/114297327/2344686521 
