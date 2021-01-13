@@ -241,7 +241,9 @@ INSERT INTO "ShippingAgency" VALUES
 INSERT INTO "Store"
 VALUES (1,'Bao Anh Shop',5,'Chuyên kinh doanh mỹ phẩm các loại.'),
 (2,'Sieu thi dien may',4,'Chuyên laptop, di động'),
-(3,'Mens Wear',5,'Dan ong lich lam');
+(3,'Mens Wear',5,'Dan ong lich lam'),
+(4,'Hoang Anh Gia Lai',5,'Cho cuộc sống thêm đẹp'),
+(5,'Beer club',5,'Drink and smoothie');
 
 INSERT INTO "Category"
 VALUES (0,'https://cdn.iconscout.com/icon/free/png-256/cloth-clothing-wearing-fashion-skirt-fancy-dress-9023.png','Thời trang nam'),
