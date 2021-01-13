@@ -2,6 +2,7 @@ const { response } = require("express");
 
 const home = (req, res, db) => {
   db.select('*')
+    .orderBy('id', 'desc')
     .table('Products')
     .innerJoin('Product_Image', 'Products.id', '=', 'Product_Image.product_id')
     .then((data) => res.status(200).json(data))
